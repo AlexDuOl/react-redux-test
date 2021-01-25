@@ -1,24 +1,40 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import Page from './page';
 
 class Results extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+        };
+
+        this.goTo = this.goTo.bind(this);
+    }
+
+    goTo(path) {
+        this.props.history.push(path);
+    }
+
     render() {
+        const {
+            results,
+        } = this.props;
 
-        const { suggestions } = this.props;
-
-        console.log(this.props);
         return (
-            <Page suggestions={suggestions}/>
+            <Page
+                results={results}
+                goTo={this.goTo}
+            />
         );
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        suggestions: state.suggestions,
-        hola: 123
-    };
-}
+const mapStateToProps = state => ({
+    results: state.results,
+});
 
-export default connect(mapStateToProps)(Results); 
+export default withRouter(
+    connect(mapStateToProps)(Results)
+);

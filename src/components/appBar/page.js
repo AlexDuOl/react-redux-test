@@ -1,22 +1,35 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
-import ToolBar from '@material-ui/core/Toolbar'
+import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import Autocomplete from  '../autocomplete';
+import Autocomplete from '../autocomplete';
+import './style.css';
 
-function Page(props){
+function Page(props) {
+    const {
+        text,
+        suggestions,
+        onChangeText,
+        onChangeSelection,
+    } = props;
+
     return (
         <AppBar position="static">
-            <ToolBar className="appbar">
+            <Toolbar className="appbar">
                 <Typography variant="h6" color="inherit">
                     Programax
                 </Typography>
 
-                <Autocomplete />
+                <Autocomplete
+                    text={text}
+                    suggestions={suggestions}
+                    onChangeText={onChangeText}
+                    onChangeSelection={onChangeSelection}
+                />
 
                 <AccountCircle />
-            </ToolBar>
+            </Toolbar>
         </AppBar>
     );
 }
