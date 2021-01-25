@@ -9,6 +9,13 @@ const reducer = combineReducers({
     currentItem,
 });
 
-const store = createStore(reducer);
+const globalState = localStorage.getItem('GLOBAL_STATE');
+const initialSatate = globalState ? JSON.parse(globalState) : undefined;
+const store = createStore(reducer, initialSatate);
+
+export const saveState = () => {
+    const state = store.getState();
+    localStorage.setItem('GLOBAL_STATE', JSON.stringify(state))
+}
 
 export default store;
